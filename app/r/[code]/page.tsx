@@ -28,21 +28,42 @@ export default async function ReplyPage({
 
   if (!invite) notFound()
 
-  return (
-    <main style={{ maxWidth: 480, margin: '40px auto', padding: 16 }}>
-      <Image
-        src={diwaliCard}
-        alt="Happy Diwali 2026 invitation"
-        priority
-        style={{ width: '100%', height: 'auto', borderRadius: 12 }}
-      />
-      <h1>Hi {guest.name}</h1>
-      <p>{invite.host_name} invites you to Diwali.</p>
-      <p>When: {invite.event_date} {invite.event_time}</p>
-      <p>Where: {invite.venue}</p>
-      <ReplyForm code={code} current={guest.reply} />
-    </main>
+//   return (
+//     <main style={{ maxWidth: 480, margin: '40px auto', padding: 16 }}>
+//       <Image
+//         src={diwaliCard}
+//         alt="Happy Diwali 2026 invitation"
+//         priority
+//         style={{ width: '100%', height: 'auto', borderRadius: 12 }}
+//       />
+//       <h1>Hi {guest.name}</h1>
+//       <p>{invite.host_name} invites you to Diwali.</p>
+//       <p>When: {invite.event_date} {invite.event_time}</p>
+//       <p>Where: {invite.venue}</p>
+//       <ReplyForm code={code} current={guest.reply} />
+//     </main>
+//   )
+
+      return (
+    <div style={{ minHeight: '100vh', background: '#fff4e0', color: '#3b1a08', padding: '24px 16px' }}>
+      <main style={{ maxWidth: 480, margin: '0 auto' }}>
+        <Image
+          src={diwaliCard}
+          alt="Happy Diwali 2026 invitation"
+          priority
+          style={{ width: '100%', height: 'auto', borderRadius: 12 }}
+        />
+        <h1 style={{ fontSize: 26, margin: '20px 0 4px' }}>Hi {guest.name}</h1>
+        <p style={{ margin: '0 0 16px' }}>{invite.host_name} invites you to Diwali.</p>
+        <div style={{ background: '#ffffff', border: '1px solid #f0d9b0', borderRadius: 12, padding: 16, marginBottom: 20, lineHeight: 1.7 }}>
+          <div><b>When:</b> {invite.event_date} {invite.event_time}</div>
+          <div><b>Where:</b> {invite.venue}</div>
+        </div>
+        <ReplyForm code={code} current={guest.reply} />
+      </main>
+    </div>
   )
+
 }
 
 
