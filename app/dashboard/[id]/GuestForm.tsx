@@ -51,9 +51,9 @@ export default function GuestForm({
             + Add another row
           </button>
         )}
-        <button type="button" onClick={onSave} disabled={busy}>
+        {/* <button type="button" onClick={onSave} disabled={busy}>
           {busy ? 'Saving...' : 'Save guests'}
-        </button>
+        </button> */}
       </div>
       <button type="button" onClick={onSave} disabled={busy}>
         {busy ? 'Saving...' : 'Save guests'}
