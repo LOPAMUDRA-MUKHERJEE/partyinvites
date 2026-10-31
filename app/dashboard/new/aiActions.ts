@@ -95,7 +95,7 @@ export async function writeInviteMessage(tone: string, hostName: string): Promis
     const prompt =
     `Write the middle part of a Diwali invitation message from ${host} to a friend or relative. ` +
     `Tone: ${TONE_HINTS[safeTone]}. ` +
-    `Rules: 2 short sentences, each under 20 words. Plain everyday words. ` +
+    `Rules: 2 short sentences, each under 20 words, and the second one must clearly ask them to come. Plain everyday words. ` +
     `Use contractions (I'm, we'll, don't) the way people do when they text. ` +
     `Do not invent anything about the host or the event: no cooking, no food they are making, no puja, no house, no guest list, no music, no plans. You only know it is Diwali and the host's name. ` +
     `No emojis, no hashtags, no greeting, no sign-off, no date, time or place (added separately). ` +
