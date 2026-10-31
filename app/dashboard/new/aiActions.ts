@@ -3,7 +3,8 @@
 import { getSupabase } from '@/lib/supabase-server'
 import { getAdminSupabase } from '@/lib/supabase-admin'
 
-const MODEL = 'gemini-2.5-flash-lite'
+// const MODEL = 'gemini-2.5-flash-lite'
+const MODEL = 'gemini-3.5-flash-lite'
 const DAILY_LIMIT = 10
 
 const TONES = ['funny', 'traditional', 'family'] as const
