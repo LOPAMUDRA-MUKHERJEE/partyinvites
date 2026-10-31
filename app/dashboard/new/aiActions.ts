@@ -14,14 +14,14 @@ const FALLBACKS: Record<Tone, string> = {
   funny:
     "Diwali is coming and so is the food. Come over, eat far too many sweets, and we'll all pretend the diet starts next week.",
   traditional:
-    "We are celebrating Diwali with a small puja and dinner at home, and it would mean a lot to have you with us. Come and share the lights and the sweets.",
+    "Diwali is here and we'd love to celebrate it with you. Come share the lights and the sweets with us.",
   family:
     "We're getting everyone together for Diwali and it won't feel right without you. Come early, stay as long as you like.",
 }
 
 const TONE_HINTS: Record<Tone, string> = {
-  funny: 'funny and teasing, with a light joke about food or sweets',
-  traditional: 'warm and respectful, mentioning puja or blessings',
+  funny: 'light and teasing, one small joke about Diwali in general (sweets, too much food, relatives), never a joke about what the host is cooking or doing',
+  traditional: 'warm and respectful, about togetherness and blessings',
   family: 'cosy and informal, like inviting close family',
 }
 
@@ -92,14 +92,23 @@ export async function writeInviteMessage(tone: string, hostName: string): Promis
   await admin.from('ai_usage').insert({ user_id: user.id })
 
   const host = hostName.replace(/[\r\n]+/g, ' ').trim().slice(0, 60) || 'the host'
-  const prompt =
-    `Write the middle part of a Diwali party invitation from ${host} to a friend or relative. ` +
+    const prompt =
+    `Write the middle part of a Diwali invitation message from ${host} to a friend or relative. ` +
     `Tone: ${TONE_HINTS[safeTone]}. ` +
-    `Rules: 2 to 3 short sentences, plain everyday words, like a real person texting. ` +
-    `No emojis, no hashtags, no greeting (the email already says Hi and the name), no sign-off, ` +
-    `no date, time or place (added separately). ` +
-    `Avoid cliches like "join us for an evening of", "festival of lights", "radiance". ` +
+    `Rules: 2 short sentences, each under 20 words. Plain everyday words. ` +
+    `Use contractions (I'm, we'll, don't) the way people do when they text. ` +
+    `Do not invent anything about the host or the event: no cooking, no food they are making, no puja, no house, no guest list, no music, no plans. You only know it is Diwali and the host's name. ` +
+    `No emojis, no hashtags, no greeting, no sign-off, no date, time or place (added separately). ` +
+    `No cliches like "join us for an evening of", "festival of lights", "radiance", "your presence". ` +
     `Output only the message text.`
+//   const prompt =
+//     `Write the middle part of a Diwali party invitation from ${host} to a friend or relative. ` +
+//     `Tone: ${TONE_HINTS[safeTone]}. ` +
+//     `Rules: 2 to 3 short sentences, plain everyday words, like a real person texting. ` +
+//     `No emojis, no hashtags, no greeting (the email already says Hi and the name), no sign-off, ` +
+//     `no date, time or place (added separately). ` +
+//     `Avoid cliches like "join us for an evening of", "festival of lights", "radiance". ` +
+//     `Output only the message text.`
 
   const raw = await askGemini(prompt)
   const cleaned = raw ? raw.trim().replace(/^["']|["']$/g, '').slice(0, 600) : ''

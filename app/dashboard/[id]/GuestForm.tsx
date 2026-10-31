@@ -40,11 +40,21 @@ export default function GuestForm({
           <input placeholder="Email" value={r.email} onChange={(e) => update(i, 'email', e.target.value)} />
         </div>
       ))}
-      {rows.length < room && (
+      {/* {rows.length < room && (
         <button type="button" onClick={() => setRows([...rows, { name: '', email: '' }])}>
           + Add another row
         </button>
-      )}{' '}
+      )}{' '} */}
+            <div style={{ display: 'flex', gap: 12, marginTop: 12 }}>
+        {rows.length < room && (
+          <button type="button" onClick={() => setRows([...rows, { name: '', email: '' }])}>
+            + Add another row
+          </button>
+        )}
+        <button type="button" onClick={onSave} disabled={busy}>
+          {busy ? 'Saving...' : 'Save guests'}
+        </button>
+      </div>
       <button type="button" onClick={onSave} disabled={busy}>
         {busy ? 'Saving...' : 'Save guests'}
       </button>
