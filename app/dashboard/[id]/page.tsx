@@ -32,7 +32,7 @@ export default async function InvitePage({ params }: { params: Promise<{ id: str
     <main style={{ padding: 40 }}>
       <a href="/dashboard">← All invites</a>
       <h1>Your invite</h1>
-      <InviteCard design={invite.design} hostName={invite.host_name} date={invite.event_date} time={invite.event_time} venue={invite.venue} message={invite.message} />
+      <InviteCard hostName={invite.host_name} date={invite.event_date} time={invite.event_time} venue={invite.venue} message={invite.message} />
 
       <h2 style={{ marginTop: 32 }}>Guest list ({list.length} of 20)</h2>
       {list.length > 0 && (

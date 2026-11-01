@@ -2,7 +2,8 @@
    import { useState } from 'react'
    import { useRouter } from 'next/navigation'
    import { createBrowserClient } from '@supabase/ssr'
-   import InviteCard, { DESIGNS, DesignKey } from '../../InviteCard'
+  //  import InviteCard, { DESIGNS, DesignKey } from '../../InviteCard'
+  import InviteCard from '../../InviteCard'
    import { writeInviteMessage } from './aiActions'
 
    export default function NewInviteForm({ userId }: { userId: string }) {
@@ -12,7 +13,7 @@
      const [time, setTime] = useState('')
      const [venue, setVenue] = useState('')
      const [message, setMessage] = useState('')
-     const [design, setDesign] = useState<DesignKey>('diya')
+    //  const [design, setDesign] = useState<DesignKey>('diya')
      const [error, setError] = useState('')
      const [saving, setSaving] = useState(false)
      const [tone, setTone] = useState('traditional')
@@ -34,7 +35,8 @@
          .from('invites')
          .insert({
            host_id: userId, host_name: hostName, event_date: date,
-           event_time: time, venue, message, design,
+          //  event_time: time, venue, message, design,
+          event_time: time, venue, message, design: 'diya',
          })
          .select('id')
          .single()
@@ -80,15 +82,15 @@
 </button>
 {aiNote && <p style={{ fontSize: 14 }}>{aiNote}</p>}
 <textarea style={{ ...box, height: 90 }} placeholder="Your message, or press Write with AI" value={message} onChange={e => setMessage(e.target.value)} />
-           <select style={box} value={design} onChange={e => setDesign(e.target.value as DesignKey)}>
+           {/* <select style={box} value={design} onChange={e => setDesign(e.target.value as DesignKey)}>
              {Object.entries(DESIGNS).map(([key, d]) => (
                <option key={key} value={key}>{d.label}</option>
              ))}
-           </select>
+           </select> */}
            {error && <p style={{ color: 'red' }}>{error}</p>}
            <button onClick={save} disabled={saving}>{saving ? 'Saving...' : 'Save invite'}</button>
          </div>
-         <InviteCard design={design} hostName={hostName || 'You'} date={date} time={time} venue={venue} message={message} />
+         <InviteCard hostName={hostName || 'You'} date={date} time={time} venue={venue} message={message} />
        </div>
      )
    }
