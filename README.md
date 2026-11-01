@@ -3,8 +3,8 @@
 Make an invite for an occasion, add your guests, and the app emails each of them a personalized invite **from your own email address**. Guests reply from their phone with one tap, and you see who is coming on a dashboard.
 
 **Live app:** https://partyinvites-76dg.vercel.app
+**Demo Vid:** https://youtu.be/JIx8h3-umTI
 
-![Invite Dashboard](demoScreenshots/Demo Video.mp4)
 ![Invite Received](demoScreenshots/InviteReceived.png)
 
 
