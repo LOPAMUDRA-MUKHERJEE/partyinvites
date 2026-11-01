@@ -7,11 +7,11 @@ import LogoutButton from './LogoutButton'
 const MAX_GUESTS = 20
 
 const C = {
-  page: '#fff8ec',
+  page: '##f1e3c8',
   text: '#2b1b0e',
-  muted: '#6b5a48',
-  card: '#ffffff',
-  border: '#f0dcc0',
+  muted: '#5e4d3a',
+  card: '#fbf3e2',
+  border: '#dcc59a',
   orange: '#c2570c',
 }
 
