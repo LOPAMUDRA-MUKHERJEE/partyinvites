@@ -4,6 +4,7 @@ import { getAdminSupabase } from '@/lib/supabase-admin'
 import InviteCard from '../../InviteCard'
 import GuestForm from './GuestForm'
 import SendButton from './SendButton'
+import DeleteGuestButton from './DeleteGuestButton'
 
 export default async function InvitePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -47,6 +48,9 @@ export default async function InvitePage({ params }: { params: Promise<{ id: str
           {list.map((g) => (
             <li key={g.id}>
               {g.name} ({g.email}) – {g.status} – {g.reply ?? 'no reply yet'}
+              {(g.status === 'not_sent' || g.status === 'failed') && (
+              <DeleteGuestButton inviteId={id} guestId={g.id} guestName={g.name} />
+              )}
             </li>
           ))}
         </ul>

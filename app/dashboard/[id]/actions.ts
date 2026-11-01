@@ -78,3 +78,49 @@ export async function saveGuests(
   revalidatePath(`/dashboard/${inviteId}`)
   return { ok: true, message: `Added ${fresh.length} guest(s).` }
 }
+
+export async function deleteGuest(
+  inviteId: string,
+  guestId: string
+): Promise<{ ok: boolean; message: string }> {
+  const cookieStore = await cookies()
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll: () => cookieStore.getAll(),
+        setAll: (list) =>
+          list.forEach(({ name, value, options }) => cookieStore.set(name, value, options)),
+      },
+    }
+  )
+
+  const { data: userData } = await supabase.auth.getUser()
+  if (!userData.user) return { ok: false, message: 'Please log in again.' }
+
+  // Row level security only returns this invite if it belongs to the logged-in host
+  const { data: invite } = await supabase
+    .from('invites')
+    .select('id')
+    .eq('id', inviteId)
+    .maybeSingle()
+  if (!invite) return { ok: false, message: 'Invite not found.' }
+
+  // One database call: delete only if the guest belongs to this invite AND has not been sent to
+  const admin = getAdminSupabase()
+  const { data: removed, error } = await admin
+    .from('guests')
+    .delete()
+    .eq('id', guestId)
+    .eq('invite_id', inviteId)
+    .in('status', ['not_sent', 'failed'])
+    .select('id')
+  if (error) return { ok: false, message: 'Could not remove the guest. Try again.' }
+  if (!removed || removed.length === 0) {
+    return { ok: false, message: 'This guest can no longer be removed (already sent, or already gone).' }
+  }
+
+  revalidatePath(`/dashboard/${inviteId}`)
+  return { ok: true, message: 'Guest removed.' }
+}
