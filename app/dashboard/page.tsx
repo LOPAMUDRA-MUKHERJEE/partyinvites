@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { getSupabase } from '@/lib/supabase-server'
 import { getAdminSupabase } from '@/lib/supabase-admin'
+import LogoutButton from './LogoutButton'
 
 const MAX_GUESTS = 20
 
@@ -71,6 +72,9 @@ export default async function Dashboard() {
   return (
     <main style={{ background: C.page, color: C.text, minHeight: '100vh', padding: '40px 20px' }}>
       <div style={{ maxWidth: 560, margin: '0 auto' }}>
+        <div style={{ textAlign: 'right', marginBottom: 12 }}>
+             <LogoutButton />
+           </div>
         <h1 style={{ fontSize: 28, lineHeight: 1.25, margin: '0 0 8px' }}>
           Send Diwali invites from your own Gmail
         </h1>
