@@ -65,7 +65,8 @@ export default function NewInviteForm({ userId }: { userId: string }) {
     display: 'block',
     boxSizing: 'border-box' as const,
     width: '100%',
-    margin: '8px 0',
+    minHeight: 44,
+    margin: '0 0 14px',
     padding: 10,
     fontSize: 16,
     background: '#fbf3e2',
@@ -75,26 +76,45 @@ export default function NewInviteForm({ userId }: { userId: string }) {
     colorScheme: 'light' as const,
   }
 
+  const label = {
+    display: 'block',
+    margin: '0 0 4px',
+    fontSize: 14,
+    fontWeight: 600,
+    color: '#5e4d3a',
+  }
+
   return (
     <div style={{ minHeight: '100vh', background: '#f1e3c8', color: '#2b1b0e' }}>
       <div style={{ display: 'flex', gap: 40, flexWrap: 'wrap', padding: 24 }}>
         <div style={{ width: '100%', maxWidth: 360 }}>
           <h1 style={{ color: '#2b1b0e', marginTop: 0 }}>New Diwali invite</h1>
-          <input style={box} placeholder="Your name" value={hostName} onChange={e => setHostName(e.target.value)} />
-          <input style={box} placeholder="Enter Date" type="date" value={date} onChange={e => setDate(e.target.value)} />
-          <input style={box} placeholder="Time, e.g. 7:00 PM" value={time} onChange={e => setTime(e.target.value)} />
-          <input style={box} placeholder="Venue / address" value={venue} onChange={e => setVenue(e.target.value)} />
-          <select style={box} value={tone} onChange={e => setTone(e.target.value)}>
+
+          <label htmlFor="host-name" style={label}>Your name</label>
+          <input id="host-name" style={box} placeholder="Your name" value={hostName} onChange={e => setHostName(e.target.value)} />
+
+          <label htmlFor="event-date" style={label}>Date</label>
+          <input id="event-date" style={box} type="date" value={date} onChange={e => setDate(e.target.value)} />
+
+          <label htmlFor="event-time" style={label}>Time</label>
+          <input id="event-time" style={box} placeholder="Time, e.g. 7:00 PM" value={time} onChange={e => setTime(e.target.value)} />
+
+          <label htmlFor="event-venue" style={label}>Venue / address</label>
+          <input id="event-venue" style={box} placeholder="Venue / address" value={venue} onChange={e => setVenue(e.target.value)} />
+
+          <label htmlFor="tone" style={label}>Tone for the AI message</label>
+          <select id="tone" style={box} value={tone} onChange={e => setTone(e.target.value)}>
             <option value="traditional">Traditional</option>
             <option value="funny">Funny</option>
             <option value="family">Family-style</option>
           </select>
+
           <button
             type="button"
             onClick={writeWithAI}
             disabled={writing}
             style={{
-              margin: '4px 0 8px',
+              margin: '0 0 14px',
               padding: '10px 16px',
               fontSize: 16,
               background: 'transparent',
@@ -107,19 +127,23 @@ export default function NewInviteForm({ userId }: { userId: string }) {
           >
             {writing ? 'Writing...' : 'Write with AI'}
           </button>
-          {aiNote && <p style={{ fontSize: 14, color: '#5e4d3a' }}>{aiNote}</p>}
+          {aiNote && <p style={{ fontSize: 14, color: '#5e4d3a', margin: '0 0 14px' }}>{aiNote}</p>}
+
+          <label htmlFor="message" style={label}>Message</label>
           <textarea
+            id="message"
             style={{ ...box, height: 90 }}
             placeholder="Your message, or press Write with AI"
             value={message}
             onChange={e => setMessage(e.target.value)}
           />
+
           {error && <p style={{ color: '#9b1c1c' }}>{error}</p>}
           <button
             onClick={save}
             disabled={saving}
             style={{
-              marginTop: 8,
+              marginTop: 4,
               padding: '12px 20px',
               fontSize: 16,
               background: '#c2570c',
