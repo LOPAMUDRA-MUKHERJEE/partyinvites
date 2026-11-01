@@ -81,7 +81,7 @@ export default function NewInviteForm({ userId }: { userId: string }) {
         <div style={{ width: '100%', maxWidth: 360 }}>
           <h1 style={{ color: '#2b1b0e', marginTop: 0 }}>New Diwali invite</h1>
           <input style={box} placeholder="Your name" value={hostName} onChange={e => setHostName(e.target.value)} />
-          <input style={box} type="date" value={date} onChange={e => setDate(e.target.value)} />
+          <input style={box} placeholder="Enter Date" type="date" value={date} onChange={e => setDate(e.target.value)} />
           <input style={box} placeholder="Time, e.g. 7:00 PM" value={time} onChange={e => setTime(e.target.value)} />
           <input style={box} placeholder="Venue / address" value={venue} onChange={e => setVenue(e.target.value)} />
           <select style={box} value={tone} onChange={e => setTone(e.target.value)}>
