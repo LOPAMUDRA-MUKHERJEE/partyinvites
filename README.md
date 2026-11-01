@@ -37,7 +37,7 @@ I wanted something small enough to build in about 2 days, but real enough that f
 ### For the guest
 - Gets an email with the invite, sent from the host's own Gmail.
 - Taps the reply link and lands on a mobile-friendly reply page.
-- Answers with one tap. No account, no login.
+- Answers with one tap (Yes, Maybe, No). No account, no login.
 - The reply page works in light and dark mode.
 
 ![Invite Dashboard](demoScreenshots/InviteDashboard.png)
