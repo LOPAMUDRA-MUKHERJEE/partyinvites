@@ -28,7 +28,6 @@ I wanted something small enough to build in about 2 days, but real enough that f
 ### For the host
 - Log in with Google.
 - Create an invite for an occasion (Diwali first) with a title, date, time, venue and a message.
-- Pick one of **3 card designs** and see a live preview.
 - Click **Write with AI** and pick a tone: **traditional**, **funny** or **family**. Gemini writes the message for you.
 - Add guests (name + email) in a list, save it, and send.
 - Open the invite page to see a **replies summary**: who said yes, who said no, who has not answered.
